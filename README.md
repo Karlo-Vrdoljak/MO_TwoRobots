@@ -10,11 +10,11 @@ Robot A wants to reach location marked 'a' in the plan, and robot B wants to rea
 Compute and return the minimum time in which both robots can reach their desired destinations at the same time. If that is impossible, return -1 instead.
 
 # Definition
-  Class:	TwoRobots
-  Method:	move
-  Parameters:	String[]
-  Returns:	int
-  Method signature:	int move(String[] plan)
+ - Class:	TwoRobots
+ - Method:	move
+ - Parameters:	String[]
+ - Returns:	int
+ - Method signature:	int move(String[] plan)
   (be sure your method is public)
   
 # Constraints
