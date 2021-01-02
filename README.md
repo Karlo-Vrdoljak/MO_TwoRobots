@@ -23,3 +23,6 @@ Compute and return the minimum time in which both robots can reach their desired
 -	Each element of plan will contain the same number of characters.
 -	plan will contain exactly one 'A', exactly one 'B', exactly one 'a', and exactly one 'b'.
 -	Each other character in plan will be either '#' or '.'.
+
+# References
+- https://community.topcoder.com/stat?c=problem_statement&pm=16537
