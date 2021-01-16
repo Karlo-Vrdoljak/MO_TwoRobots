@@ -27,10 +27,12 @@ class TwoRobots(object):
 
     def __check_legal_movement(self, x, y):
         """
-        Check if this position equals a collision with each other or a wall
+        Check if this position equals a collision with a wall, or illegal move
         """
+        # if out of bounds of floor plan or negative robot coordinate movement -> illegal movement
         if(x < 0 or y < 0 or x >= self.floor['len_x'] or y >= self.floor['len_y']):
             return False
+        # if is wall -> illegal movement
         if(self.floor['plan'][x][y] == '#'):
             return False
         return True
@@ -83,17 +85,22 @@ class TwoRobots(object):
             for i in range(4):
                 next_xa = coords['xa'] + self.walk[i][0]
                 next_ya = coords['ya'] + self.walk[i][1]
+                # ilegalan potez -> zid ili van mape
                 if not self.__check_legal_movement(next_xa, next_ya):
                     continue
                 for j in range(4):
                     next_xb = coords['xb'] + self.walk[j][0]
                     next_yb = coords['yb'] + self.walk[j][1]
+                    # ilegalan potez -> zid ili van mape
                     if not self.__check_legal_movement(next_xb, next_yb):
                         continue
+                    # ilegalan potez -> ostat ce di su i bili 
                     if next_xb == coords['xa'] and next_yb == coords['ya'] and next_xa == coords['xb'] and next_ya == coords['yb']:
                         continue
+                    # ilegalan potez -> slupat ce se jedan u drugoga
                     if next_xb == next_xa and next_yb == next_ya:
                         continue
+                    # ako tu nisu vec bili, otidi tamo
                     if floor_point[next_xa][next_ya][next_xb][next_yb] == None:
                         floor_point[next_xa][next_ya][next_xb][next_yb] = now[FIRST] + 1
                         self.queue.append( (now[FIRST] + 1, ( (next_xa, next_ya), (next_xb, next_yb) )) )
