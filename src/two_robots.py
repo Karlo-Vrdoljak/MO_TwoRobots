@@ -73,6 +73,7 @@ class TwoRobots(object):
         floor_point = np.full((40,40,40,40), None)
         floor_point[self.start_a[FIRST]][self.start_a[SECOND]][self.start_b[FIRST]][self.start_b[SECOND]] = 0
         while(len(self.queue)):
+            # odaberi prvi moguci potez iz queuea mogucih poteza
             now = self.queue.pop(0)
             if now[SECOND][FIRST] == self.target_a and now[SECOND][SECOND] == self.target_b:
                 return now[FIRST]
@@ -87,6 +88,7 @@ class TwoRobots(object):
                 next_ya = coords['ya'] + self.walk[i][1]
                 # ilegalan potez -> zid ili van mape
                 if not self.__check_legal_movement(next_xa, next_ya):
+                    # nema smisla trazit zajednicku kombinaciju robota ako je vec 1. robot u ilegalnom potezu
                     continue
                 for j in range(4):
                     next_xb = coords['xb'] + self.walk[j][0]
@@ -100,7 +102,7 @@ class TwoRobots(object):
                     # ilegalan potez -> slupat ce se jedan u drugoga
                     if next_xb == next_xa and next_yb == next_ya:
                         continue
-                    # ako tu nisu vec bili, otidi tamo
+                    # ako tu nisu vec bili, dodaj u moguci iduci potez
                     if floor_point[next_xa][next_ya][next_xb][next_yb] == None:
                         floor_point[next_xa][next_ya][next_xb][next_yb] = now[FIRST] + 1
                         self.queue.append( (now[FIRST] + 1, ( (next_xa, next_ya), (next_xb, next_yb) )) )
